@@ -14,7 +14,7 @@
         .header-left { display: flex; align-items: center; font-size: 1.2rem; cursor: pointer; }
         .header-username { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
         
-        /* 인스타그램 공식 톱니바퀴/꽃모양 인증뱃지 SVG */
+        /* 인스타그램 공식 인증뱃지 SVG 스타일 */
         .badge-icon { width: 18px; height: 18px; fill: #0095f6; display: inline-block; vertical-align: middle; }
 
         .header-right { display: flex; align-items: center; gap: 18px; font-size: 1.2rem; }
@@ -23,7 +23,7 @@
         .profile-container { padding: 16px 16px 8px 16px; }
         .profile-top { display: flex; align-items: center; margin-bottom: 16px; }
         .profile-img-box { margin-right: 28px; }
-        .profile-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background-color: #efefef; }
         
         .profile-stats { display: flex; flex: 1; justify-content: space-around; text-align: center; }
         .stat-item { display: flex; flex-direction: column; }
@@ -40,7 +40,7 @@
         /* 하이라이트 */
         .highlights { display: flex; gap: 16px; overflow-x: auto; padding: 6px 0 12px 0; margin-bottom: 6px; }
         .highlight-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; width: 68px; flex-shrink: 0; }
-        .highlight-circle { width: 64px; height: 64px; border-radius: 50%; border: 1px solid #dbdbdb; padding: 2px; margin-bottom: 6px; }
+        .highlight-circle { width: 64px; height: 64px; border-radius: 50%; border: 1px solid #dbdbdb; padding: 2px; margin-bottom: 6px; background-color: #fafafa; }
         .highlight-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
         /* 탭 바 */
@@ -70,17 +70,9 @@
         <div class="header-left"><i class="fa-solid fa-arrow-left"></i></div>
         <div class="header-username">
             byeonwooseok
-            <!-- 인스타그램 정품 톱니바퀴 인증 뱃지 SVG -->
+            <!-- 깔끔한 인스타그램 공식 인증 뱃지 SVG -->
             <svg class="badge-icon" viewBox="0 0 24 24">
-                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7l-3.8-3.8 1.4-1.4 2.4 2.4 6-6 1.4 1.4-7.4 7.4z" style="display:none;"/>
-                <path d="M19.965 8.521C19.988 8.347 20 8.173 20 8c0-2.379-2.143-4.288-4.521-3.965C14.786 2.803 13.082 2 11.2 2c-2.379 0-4.288 2.143-3.965 4.521C6.003 7.214 5.2 8.918 5.2 10.8c0 2.379 2.143 4.288 4.521 3.965C10.414 15.997 12.118 16.8 14 16.8c2.379 0 4.288-2.143 3.965-4.521C19.197 11.586 20 9.882 20 8zm-8.2 5.2l-3.2-3.2 1.4-1.4 1.8 1.8 5.2-5.2 1.4 1.4-6.6 6.6z" style="display:none;"/>
-                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" style="display:none;"/>
-                <!-- 인스타 공식 톱니바퀴 인증마크 -->
-                <path d="M12 2c5.52 0 10 4.48 10 10s-4.48 10-10 10S2 17.52 2 12 6.48 2 12 2zm-1.2 13.4l6.3-6.3-1.4-1.4-4.9 4.9-2.1-2.1-1.4 1.4 3.5 3.5z" style="display:none;"/>
-                <path d="M19.35 10.04C18.67 6.59 15.64 3.93 12 3.93c-3.64 0-6.67 2.66-7.35 6.11-1.74.83-2.95 2.6-2.95 4.66 0 2.87 2.33 5.2 5.2 5.2 1.13 0 2.17-.36 3.02-.98 1.18.84 2.63 1.33 4.08 1.33 1.45 0 2.9-.49 4.08-1.33.85.62 1.89.98 3.02.98 2.87 0 5.2-2.33 5.2-5.2 0-2.06-1.21-3.83-2.95-4.66z" style="display:none;"/>
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" style="display:none;"/>
-                <!-- 인스타그램 검증 스타버스트 뱃지 -->
-                <path d="M22.5 12.5c0-.8-.5-1.5-1.1-1.9.3-.8.2-1.8-.4-2.4-.6-.6-1.6-.7-2.4-.4-.4-.6-1.1-1.1-1.9-1.1s-1.5.5-1.9 1.1c-.8-.3-1.8-.2-2.4.4-.6.6-.7 1.6-.4 2.4-.6.4-1.1 1.1-1.1 1.9s.5 1.5 1.1 1.9c-.3.8-.2 1.8.4 2.4.6.6 1.6.7 2.4.4.4.6 1.1 1.1 1.9 1.1s1.5-.5 1.9-1.1c.8.3 1.8.2 2.4-.4.6-.6.7-1.6.4-2.4.6-.4 1.1-1.1 1.1-1.9zm-10.7 1.2l-2.8-2.8 1.4-1.4 1.4 1.4 4.2-4.2 1.4 1.4-5.6 5.6z"/>
+                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7l-3.8-3.8 1.4-1.4 2.4 2.4 6-6 1.4 1.4-7.4 7.4z"/>
             </svg>
         </div>
         <div class="header-right">
@@ -93,7 +85,7 @@
     <div class="profile-container">
         <div class="profile-top">
             <div class="profile-img-box">
-                <img src="https://via.placeholder.com/150" class="profile-img" alt="변우석">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" class="profile-img" alt="변우석">
             </div>
             <div class="profile-stats">
                 <div class="stat-item">
@@ -111,7 +103,7 @@
             </div>
         </div>
 
-        <!-- 바이오 내용 (스크린샷 내용 반영) -->
+        <!-- 바이오 내용 -->
         <div class="profile-bio">
             <div class="bio-fullname">변우석 Woo Seok Byeon</div>
             <div class="bio-agency">바로엔터테인먼트</div>
@@ -125,7 +117,7 @@
         <div class="highlights">
             <div class="highlight-item">
                 <div class="highlight-circle">
-                    <img src="https://via.placeholder.com/100" class="highlight-img" alt="하이라이트">
+                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=100" class="highlight-img" alt="하이라이트">
                 </div>
                 <span>생일 축하해줘서 ...</span>
             </div>
@@ -156,11 +148,11 @@
     </div>
 
     <script>
-        // 샘플 피드 데이터 (자동수집 세팅 전 보기용)
+        // 샘플 피드 데이터
         const archiveData = [
-            { id: 1, date: '2026-08-15', img: 'https://via.placeholder.com/400/808080/FFFFFF?text=Post+1', text: '오늘 하루도 파이팅! 💙' },
-            { id: 2, date: '2026-07-20', img: 'https://via.placeholder.com/400/505050/FFFFFF?text=Post+2', text: '감사합니다 ☀️' },
-            { id: 3, date: '2026-06-10', img: 'https://via.placeholder.com/400/303030/FFFFFF?text=Post+3', text: '촬영 중 📸' }
+            { id: 1, date: '2026-08-15', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500', text: '오늘 하루도 파이팅! 💙' },
+            { id: 2, date: '2026-07-20', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500', text: '감사합니다 ☀️' },
+            { id: 3, date: '2026-06-10', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500', text: '촬영 중 📸' }
         ];
 
         function renderGrid() {
