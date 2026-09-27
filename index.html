@@ -44,7 +44,6 @@
         .highlights { display: flex; gap: 16px; overflow-x: auto; padding: 6px 0 12px 0; margin-bottom: 6px; }
         .highlight-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; width: 68px; flex-shrink: 0; }
         .highlight-circle { width: 64px; height: 64px; border-radius: 50%; border: 1px solid #dbdbdb; padding: 2px; margin-bottom: 6px; background-color: #fafafa; }
-        .highlight-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
         /* 탭 바 */
         .tab-bar { display: flex; border-top: 1px solid #efefef; }
@@ -62,7 +61,7 @@
         .modal-img { width: 100%; max-height: 400px; object-fit: cover; }
         .modal-body { padding: 14px 16px; }
         .modal-date { font-size: 0.75rem; color: #8e8e8e; margin-bottom: 6px; }
-        .modal-text { font-size: 0.9rem; line-height: 1.4; }
+        .modal-text { font-size: 0.9rem; line-height: 1.4; white-space: pre-line; }
         .close-btn { position: absolute; top: 12px; right: 16px; font-size: 24px; color: #fff; cursor: pointer; }
     </style>
 </head>
@@ -73,7 +72,6 @@
         <div class="header-left"><i class="fa-solid fa-arrow-left"></i></div>
         <div class="header-username">
             byeonwooseok
-            <!-- 인스타그램 정품 파란 톱니바퀴 인증 뱃지 -->
             <span class="verified-container">
                 <i class="fa-solid fa-certificate verified-bg"></i>
                 <i class="fa-solid fa-check verified-check"></i>
@@ -89,8 +87,7 @@
     <div class="profile-container">
         <div class="profile-top">
             <div class="profile-img-box">
-                <!-- 저장소에 올려둔 profile.jpg 이미지를 불러옵니다 -->
-                <img src="profile.jpg" class="profile-img" alt="변우석" onerror="this.style.display='none';">
+                <img src="profile.jpg" class="profile-img" alt="변우석" onerror="this.src='https://raw.githubusercontent.com/byeonwooseok/archive/main/default.jpg';">
             </div>
             <div class="profile-stats">
                 <div class="stat-item">
@@ -153,8 +150,19 @@
     </div>
 
     <script>
-        // 자동 수집 전 안내 데이터
-        const archiveData = [];
+        let archiveData = [];
+
+        // posts.json에서 게시글 데이터를 불러옴
+        fetch('posts.json')
+            .then(res => res.json())
+            .then(data => {
+                archiveData = data;
+                renderGrid();
+            })
+            .catch(err => {
+                console.log('posts.json 불러오기 대기 중');
+                renderGrid();
+            });
 
         function renderGrid() {
             const container = document.getElementById('gridContainer');
@@ -165,7 +173,7 @@
             if (archiveData.length === 0) {
                 container.innerHTML = `<div style="grid-column: 1 / -1; padding: 50px 0; text-align: center; color: #8e8e8e; font-size: 0.9rem;">
                     <i class="fa-solid fa-camera" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
-                    자동 수집 세팅을 완료하면<br>변우석 배우님의 인스타그램 게시물이 채워집니다 💙
+                    posts.json 파일에 인스타그램 게시물을 추가해주세요 💙
                 </div>`;
                 return;
             }
@@ -189,8 +197,6 @@
         function closeModal() {
             document.getElementById('postModal').style.display = 'none';
         }
-
-        renderGrid();
     </script>
 </body>
 </html>
