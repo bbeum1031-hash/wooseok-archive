@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WOOSEOK ARCHIVE</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #fff; color: #000; padding-bottom: 60px; }
+        
+        header { display: flex; justify-content: center; align-items: center; padding: 12px 16px; border-bottom: 1px solid #efefef; position: sticky; top: 0; background: #fff; z-index: 100; }
+        .header-username { font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .verified-badge { color: #0095f6; font-size: 0.9rem; }
+
+        .profile-container { padding: 16px 16px 8px 16px; }
+        .profile-main { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+        .profile-img-container { position: relative; }
+        .profile-img { width: 77px; height: 77px; border-radius: 50%; object-fit: cover; border: 1px solid #dbdbdb; }
+        
+        .profile-stats { display: flex; gap: 24px; text-align: center; }
+        .stat-item { display: flex; flex-direction: column; }
+        .stat-num { font-weight: 700; font-size: 1rem; }
+        .stat-label { font-size: 0.8rem; color: #262626; }
+
+        .profile-bio { margin-bottom: 12px; }
+        .bio-name { font-weight: 600; font-size: 0.9rem; }
+        .bio-text { font-size: 0.85rem; color: #262626; white-space: pre-line; margin-top: 2px; }
+
+        .btn-group { display: flex; gap: 8px; margin-bottom: 16px; }
+        .btn-item { flex: 1; padding: 7px 0; background-color: #efefef; border: none; border-radius: 8px; font-weight: 600; font-size: 0.85rem; text-align: center; cursor: pointer; }
+
+        .highlights { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 12px; margin-bottom: 8px; }
+        .highlight-item { display: flex; flex-direction: column; align-items: center; font-size: 0.75rem; width: 64px; flex-shrink: 0; }
+        .highlight-circle { width: 60px; height: 60px; border-radius: 50%; border: 1px solid #dbdbdb; padding: 2px; margin-bottom: 4px; }
+        .highlight-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+
+        .tab-bar { display: flex; border-top: 1px solid #dbdbdb; border-bottom: 1px solid #efefef; }
+        .tab-item { flex: 1; text-align: center; padding: 10px 0; font-size: 1.2rem; color: #8e8e8e; cursor: pointer; }
+        .tab-item.active { color: #000; border-bottom: 2px solid #000; }
+
+        .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background-color: #fff; }
+        .grid-item { aspect-ratio: 1 / 1; position: relative; overflow: hidden; background-color: #f0f0f0; cursor: pointer; }
+        .grid-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; padding: 16px; }
+        .modal-card { background: #fff; width: 100%; max-width: 450px; border-radius: 12px; overflow: hidden; position: relative; }
+        .modal-img { width: 100%; max-height: 400px; object-fit: cover; }
+        .modal-body { padding: 12px 16px; }
+        .modal-date { font-size: 0.75rem; color: #8e8e8e; margin-bottom: 6px; }
+        .modal-text { font-size: 0.9rem; line-height: 1.4; }
+        .close-btn { position: absolute; top: 12px; right: 16px; font-size: 24px; color: #fff; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-username">
+            byeonwooseok <span class="verified-badge">✔</span>
+        </div>
+    </header>
+
+    <div class="profile-container">
+        <div class="profile-main">
+            <div class="profile-img-container">
+                <img src="https://via.placeholder.com/150" class="profile-img" id="profileImg" alt="프로필">
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <span class="stat-num" id="postCount">0</span>
+                    <span class="stat-label">게시물</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-num">아카이브</span>
+                    <span class="stat-label">타입</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-bio">
+            <div class="bio-name">변우석 Byeon Woo Seok</div>
+            <div class="bio-text">변우석 배우님 인스타그램 백업 & 팬 아카이브 💙</div>
+        </div>
+
+        <div class="btn-group">
+            <div class="btn-item">카테고리</div>
+            <div class="btn-item">최신순 정렬</div>
+        </div>
+
+        <div class="highlights">
+            <div class="highlight-item" onclick="filterByYear('all')">
+                <div class="highlight-circle"><img src="https://via.placeholder.com/60/0095f6/ffffff?text=ALL" class="highlight-img"></div>
+                <span>전체</span>
+            </div>
+            <div class="highlight-item" onclick="filterByYear('2026')">
+                <div class="highlight-circle"><img src="https://via.placeholder.com/60/e0e0e0/000000?text=2026" class="highlight-img"></div>
+                <span>2026년</span>
+            </div>
+            <div class="highlight-item" onclick="filterByYear('2025')">
+                <div class="highlight-circle"><img src="https://via.placeholder.com/60/e0e0e0/000000?text=2025" class="highlight-img"></div>
+                <span>2025년</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <div class="tab-item active">▦</div>
+    </div>
+
+    <div class="grid-container" id="gridContainer"></div>
+
+    <div class="modal" id="postModal" onclick="closeModal()">
+        <span class="close-btn">&times;</span>
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <img class="modal-img" id="modalImg" src="">
+            <div class="modal-body">
+                <div class="modal-date" id="modalDate"></div>
+                <div class="modal-text" id="modalText"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const archiveData = [
+            { id: 1, year: '2026', date: '2026-08-15', img: 'https://via.placeholder.com/400/808080/FFFFFF?text=Post+1', text: '오늘 하루도 파이팅! 💙' },
+            { id: 2, year: '2025', date: '2025-12-25', img: 'https://via.placeholder.com/400/505050/FFFFFF?text=Post+2', text: 'Merry Christmas 🎄' },
+        ];
+
+        function renderGrid(yearFilter = 'all') {
+            const container = document.getElementById('gridContainer');
+            container.innerHTML = '';
+            
+            const list = yearFilter === 'all' ? archiveData : archiveData.filter(item => item.year === yearFilter);
+            document.getElementById('postCount').innerText = list.length;
+
+            list.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'grid-item';
+                div.onclick = () => openModal(item);
+                div.innerHTML = `<img src="${item.img}" alt="post">`;
+                container.appendChild(div);
+            });
+        }
+
+        function openModal(item) {
+            document.getElementById('modalImg').src = item.img;
+            document.getElementById('modalDate').innerText = item.date;
+            document.getElementById('modalText').innerText = item.text;
+            document.getElementById('postModal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('postModal').style.display = 'none';
+        }
+
+        function filterByYear(year) {
+            renderGrid(year);
+        }
+
+        renderGrid();
+    </script>
+</body>
+</html>
