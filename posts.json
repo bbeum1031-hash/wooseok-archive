@@ -1,20 +1,12 @@
 [
   {
-    "id": "1",
-    "date": "2024년 5월 28일",
+    "id": "ABC123",
+    "date": "2024-05-28",
     "images": [
-      "post1_1.jpg",
-      "post1_2.jpg",
-      "post1_3.jpg"
+      "images/2024/2024-05-28_01.jpg",
+      "images/2024/2024-05-28_02.jpg"
     ],
-    "text": "변우석 배우님 인스타그램 피드 💙 (여러 장 게시물)"
-  },
-  {
-    "id": "2",
-    "date": "2024년 6월 1일",
-    "images": [
-      "profile.jpg"
-    ],
-    "text": "단장 사진 게시물"
+    "text": "게시물 캡션",
+    "url": "https://www.instagram.com/p/ABC123/"
   }
 ]
