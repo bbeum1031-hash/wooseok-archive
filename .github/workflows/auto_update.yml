@@ -1,0 +1,33 @@
+name: Instagram Auto Sync
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # 6시간마다 자동 체크
+  workflow_dispatch:      # 필요시 수동 실행 가능
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4
+
+      - name: Run Scraper
+        run: python scraper.py
+
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "GitHub Action Bot"
+          git config --global user.email "action@github.com"
+          git add posts.json
+          git commit -m "Auto updated posts.json" || exit 0
+          git push
