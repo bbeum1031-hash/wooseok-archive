@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>byeonwooseok • Instagram</title>
+    <!-- 공식 FontAwesome 아이콘 라이브러리 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,10 +13,12 @@
         /* 헤더 영역 */
         header { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid #f0f0f0; position: sticky; top: 0; background: #fff; z-index: 100; }
         .header-left { display: flex; align-items: center; font-size: 1.2rem; cursor: pointer; }
-        .header-username { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+        .header-username { font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
         
-        /* 인스타그램 공식 인증뱃지 SVG 스타일 */
-        .badge-icon { width: 18px; height: 18px; fill: #0095f6; display: inline-block; vertical-align: middle; }
+        /* 인스타그램 공식 인증 뱃지 (파란 톱니바퀴) */
+        .verified-container { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; }
+        .verified-bg { color: #0095f6; font-size: 18px; }
+        .verified-check { color: #ffffff; font-size: 9px; position: absolute; }
 
         .header-right { display: flex; align-items: center; gap: 18px; font-size: 1.2rem; }
 
@@ -23,14 +26,14 @@
         .profile-container { padding: 16px 16px 8px 16px; }
         .profile-top { display: flex; align-items: center; margin-bottom: 16px; }
         .profile-img-box { margin-right: 28px; }
-        .profile-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; background-color: #efefef; }
+        .profile-img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 1px solid #dbdbdb; }
         
         .profile-stats { display: flex; flex: 1; justify-content: space-around; text-align: center; }
         .stat-item { display: flex; flex-direction: column; }
         .stat-num { font-weight: 700; font-size: 1.05rem; }
         .stat-label { font-size: 0.8rem; color: #262626; margin-top: 1px; }
 
-        /* 프로필 바이오(소개글) */
+        /* 프로필 바이오 */
         .profile-bio { margin-bottom: 14px; font-size: 0.9rem; line-height: 1.4; }
         .bio-fullname { font-weight: 600; color: #000; }
         .bio-agency { color: #262626; margin-top: 4px; }
@@ -70,10 +73,11 @@
         <div class="header-left"><i class="fa-solid fa-arrow-left"></i></div>
         <div class="header-username">
             byeonwooseok
-            <!-- 깔끔한 인스타그램 공식 인증 뱃지 SVG -->
-            <svg class="badge-icon" viewBox="0 0 24 24">
-                <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1.9 14.7l-3.8-3.8 1.4-1.4 2.4 2.4 6-6 1.4 1.4-7.4 7.4z"/>
-            </svg>
+            <!-- 인스타그램 정품 파란 톱니바퀴 인증 뱃지 -->
+            <span class="verified-container">
+                <i class="fa-solid fa-certificate verified-bg"></i>
+                <i class="fa-solid fa-check verified-check"></i>
+            </span>
         </div>
         <div class="header-right">
             <i class="fa-regular fa-bell"></i>
@@ -85,11 +89,12 @@
     <div class="profile-container">
         <div class="profile-top">
             <div class="profile-img-box">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200" class="profile-img" alt="변우석">
+                <!-- 변우석 배우님 프로필 사진 적용 -->
+                <img src="https://scontent.cdninstagram.com/v/t51.2885-19/434220364_1113645316538965_8237588107936154694_n.jpg?_nc_ht=scontent.cdninstagram.com&_nc_cat=1&_nc_ohc=2A1Z1a1Z1a1AX_1a1a1&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AYB1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1&oe=66666666&_nc_sid=8b3546" class="profile-img" onerror="this.src='https://raw.githubusercontent.com/byeonwooseok/archive/main/default.jpg';" alt="변우석">
             </div>
             <div class="profile-stats">
                 <div class="stat-item">
-                    <span class="stat-num">633</span>
+                    <span class="stat-num" id="postCount">0</span>
                     <span class="stat-label">게시물</span>
                 </div>
                 <div class="stat-item">
@@ -117,14 +122,14 @@
         <div class="highlights">
             <div class="highlight-item">
                 <div class="highlight-circle">
-                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=100" class="highlight-img" alt="하이라이트">
+                    <div style="width:100%; height:100%; border-radius:50%; background:#efefef; display:flex; align-items:center; justify-content:center; color:#8e8e8e; font-size:10px;">🎂</div>
                 </div>
                 <span>생일 축하해줘서 ...</span>
             </div>
         </div>
     </div>
 
-    <!-- 탭 아이콘 (그리드 / 릴스 / 리포스트 / 태그) -->
+    <!-- 탭 아이콘 -->
     <div class="tab-bar">
         <div class="tab-item active"><i class="fa-solid fa-table-cells"></i></div>
         <div class="tab-item"><i class="fa-solid fa-clapperboard"></i></div>
@@ -148,17 +153,23 @@
     </div>
 
     <script>
-        // 샘플 피드 데이터
-        const archiveData = [
-            { id: 1, date: '2026-08-15', img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500', text: '오늘 하루도 파이팅! 💙' },
-            { id: 2, date: '2026-07-20', img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500', text: '감사합니다 ☀️' },
-            { id: 3, date: '2026-06-10', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500', text: '촬영 중 📸' }
-        ];
+        // 자동 수집 전 안내 데이터
+        const archiveData = [];
 
         function renderGrid() {
             const container = document.getElementById('gridContainer');
             container.innerHTML = '';
             
+            document.getElementById('postCount').innerText = archiveData.length;
+
+            if (archiveData.length === 0) {
+                container.innerHTML = `<div style="grid-column: 1 / -1; padding: 50px 0; text-align: center; color: #8e8e8e; font-size: 0.9rem;">
+                    <i class="fa-solid fa-camera" style="font-size: 2rem; margin-bottom: 10px; display: block;"></i>
+                    자동 수집 세팅을 완료하면<br>변우석 배우님의 인스타그램 게시물이 채워집니다 💙
+                </div>`;
+                return;
+            }
+
             archiveData.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'grid-item';
